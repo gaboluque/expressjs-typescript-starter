@@ -1,10 +1,9 @@
 import BusinessValidationError from '../../../complements/exceptions/BusinessValidationError';
-import notificationSubscriber, {
-  TOKEN_CONFIRMATION_NOTIFICATION,
-} from '../../../complements/subscribers/notificationSubscriber';
 import { UsersRepo } from '../../users/users.repo';
+import { leanUser } from '../../users/users.methods';
 import msg from '../../../utils/msg';
 import { simpleProjection } from '../../../utils/shared/aggegationHelpers';
+import { ee, events } from '../../../lib/core/EventEmitter';
 
 const verifyBusinessRules = async (email: string) => {
   const user = await UsersRepo.findOne(
@@ -19,11 +18,11 @@ const verifyBusinessRules = async (email: string) => {
   return user;
 };
 
-export const tokenConfirmationSender = async ({ email }: { email: string }) => {
+export const tokenConfirmationSender = async (email: string) => {
   const user = await verifyBusinessRules(email);
   const confirmationToken = await UsersRepo.tokenGenerator('confirmationToken');
   const updatedUser = await UsersRepo.updateById(user.id, {
     'userContext.confirmationToken': confirmationToken,
   });
-  notificationSubscriber.emit(TOKEN_CONFIRMATION_NOTIFICATION, updatedUser);
+  ee.emit(events.GET_CONFIRMATION_TOKEN_EVENT, leanUser(updatedUser));
 };

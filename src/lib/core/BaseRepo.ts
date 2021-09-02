@@ -13,16 +13,20 @@ export default (model: Model<any>) => ({
     return model.find(filter, projection, options);
   },
   updateById(id: string, update = {}, options = {}) {
-    return model.findByIdAndUpdate(id, update, {
-      ...updateOptions,
-      ...options,
-    });
+    return model
+      .findByIdAndUpdate(id, update, {
+        ...updateOptions,
+        ...options,
+      })
+      .lean();
   },
   update(filter = {}, update = {}, options = {}) {
-    return model.findOneAndUpdate(filter, update, {
-      ...updateOptions,
-      ...options,
-    });
+    return model
+      .findOneAndUpdate(filter, update, {
+        ...updateOptions,
+        ...options,
+      })
+      .lean();
   },
   create(item: any) {
     return model.create(item);

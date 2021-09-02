@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
 import BusinessValidationError from '../../../complements/exceptions/BusinessValidationError';
+import { createJWT, leanUser } from '../../users/users.methods';
 import msg from '../../../utils/msg';
 import { IAuth, IUserContext, IUserDoc } from '../../users/users.types';
 import { UsersRepo } from '../../users/users.repo';
-import { createJWT, leanUser } from '../../users/methods/userMethods';
 
 const badAuthError = () => {
   throw new BusinessValidationError(msg.INVALID_CREDENTIALS);

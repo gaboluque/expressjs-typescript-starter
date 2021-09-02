@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { NextFunction } from 'express';
-import encryptionGenerator from '../../../utils/shared/utilServices/encryptionGenerator';
-import { IUser, IUserDoc } from '../users.types';
-import { IAuthData } from '../../auth/auth.types';
-import { authConf } from '../../../config';
+import encryptionGenerator from '../../utils/shared/utilServices/encryptionGenerator';
+import { IUser, IUserDoc } from './users.types';
+import { IAuthData } from '../auth/auth.types';
+import { authConf } from '../../config';
 
 const leanUser = (user: IUser) => {
   const userObject = { ...user };

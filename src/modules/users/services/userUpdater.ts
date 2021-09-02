@@ -1,7 +1,7 @@
 import { UsersRepo } from '../users.repo';
 import { IUserDTO } from '../users.types';
-import { leanUser } from '../methods/userMethods';
 import NotFoundError from '../../../complements/exceptions/NotFoundError';
+import { leanUser } from '../users.methods';
 import msg from '../../../utils/msg';
 import encryptionGenerator from '../../../utils/shared/utilServices/encryptionGenerator';
 

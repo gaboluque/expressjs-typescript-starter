@@ -15,7 +15,5 @@ export default async ({ query, pagination }: IPagination) => {
   if (match.name) match.name = new RegExp(match.name, 'i');
   if (match.email) match.email = new RegExp(match.email, 'i');
 
-  console.log(match);
-
   return aggregateFetcher(UserModel, pagination, usersFetcherAggregation(match));
 };

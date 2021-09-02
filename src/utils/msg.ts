@@ -16,6 +16,7 @@ const msg = {
   USER_NOT_FOUND: 'userNotFound',
   REQUIRED_PASSWORD: 'userRequiredPassword',
   PASSWORD_MIN_LENGTH_7: 'userPasswordMinLength7',
+  REQUIRED_ID: 'userRequiredId',
   REQUIRED_EMAIL: 'userRequiredEmail',
   INVALID_EMAIL: 'userInvalidEmail',
   USER_REQUIRED_NAME: 'userRequiredName',

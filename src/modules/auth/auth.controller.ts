@@ -10,14 +10,10 @@ import {
   tokenVerifier,
   userCreator,
 } from './auth.services';
+import { authData } from '../users/users.methods';
 import sessionTemplate from '../../complements/helpers/templates/sessionTemplate';
 import { emailValidator, resetPasswordValidator, userValidator } from '../users/users.validators';
-import { authData } from '../users/methods/userMethods';
 import passwordRecoverer from './services/passwordRecoverer';
-import notificationSubscriber, {
-  PASSWORD_RECOVERY_NOTIFICATION,
-  PASSWORD_RESET_NOTIFICATION,
-} from '../../complements/subscribers/notificationSubscriber';
 import passwordRestorer from './services/passwordRestorer';
 import { IUser } from '../users/users.types';
 
@@ -49,7 +45,7 @@ export class AuthController {
   @Post('/email-confirmation')
   @Sanitize(confirmTokenValidator)
   public async confirmEmail({ permittedParams }: Request, res: Response) {
-    const { user, token } = await tokenConfirmator(permittedParams);
+    const { user, token } = await tokenConfirmator(permittedParams.confirmationToken);
     res
       .status(200)
       .send(responseFormatter(sessionTemplate(authData(user as IUser), token), msg.LOG_IN_SUCCESS));
@@ -58,7 +54,7 @@ export class AuthController {
   @Get('/email-confirmation')
   @Sanitize(emailValidator)
   public async resendToken({ permittedParams }: Request, res: Response) {
-    await tokenConfirmationSender(permittedParams);
+    await tokenConfirmationSender(permittedParams.email);
     res.status(200).send(responseFormatter(null, msg.CONFIRMATION_EMAIL_SENT));
   }
 
@@ -66,15 +62,13 @@ export class AuthController {
   @Sanitize(emailValidator)
   public async resetPassword({ permittedParams }: Request, res: Response) {
     const user = await passwordRecoverer(permittedParams.email);
-    notificationSubscriber.emit(PASSWORD_RECOVERY_NOTIFICATION, user);
-    res.status(200).send(responseFormatter(null, msg.RECOVER_PASSWORD_EMAIL_SENT));
+    res.status(200).send(responseFormatter(user, msg.RECOVER_PASSWORD_EMAIL_SENT));
   }
 
   @Put('/restore-password')
   @Sanitize(resetPasswordValidator)
   public async restorePassword({ permittedParams }: Request, res: Response) {
     const user = await passwordRestorer(permittedParams);
-    notificationSubscriber.emit(PASSWORD_RESET_NOTIFICATION, user);
-    res.status(200).send(responseFormatter(null, msg.RESET_PASSWORD_SUCCESS));
+    res.status(200).send(responseFormatter(user, msg.RESET_PASSWORD_SUCCESS));
   }
 }

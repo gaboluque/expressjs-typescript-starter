@@ -7,6 +7,7 @@ import loggerMiddleware from './complements/middlewares/loggerMiddleware';
 import { AppRouter } from './lib/core/AppRouter';
 import { routesMiddleware } from './complements/middlewares/routes';
 import { cacheCatcher } from './complements/middlewares/cache';
+import './complements/subscribers';
 import './modules/auth/auth.controller';
 import './modules/users/users.controller';
 

@@ -4,7 +4,7 @@ import userContextSchema from './userContextSchema';
 import { IUser } from '../users.types';
 import { LooseObject } from '../../../lib/commonTypes';
 
-const userSchemaFields: Record<keyof Omit<IUser, '_id'>, LooseObject> = {
+const userSchemaFields: Record<keyof Omit<IUser, '_id' | 'id'>, LooseObject> = {
   email: {
     type: String,
     required: msg.REQUIRED_EMAIL,

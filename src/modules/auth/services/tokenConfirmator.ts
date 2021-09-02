@@ -1,13 +1,12 @@
 import { UsersRepo } from '../../users/users.repo';
-import { IUserContext } from '../../users/users.types';
-import { createJWT, leanUser } from '../../users/methods/userMethods';
 import BusinessValidationError from '../../../complements/exceptions/BusinessValidationError';
+import { createJWT, leanUser } from '../../users/users.methods';
 import msg from '../../../utils/msg';
 
-export const tokenConfirmator = async ({ confirmationToken }: IUserContext) => {
+export const tokenConfirmator = async (confirmationToken: string) => {
   const user = await UsersRepo.confirmUserToken(confirmationToken);
   if (!user) throw new BusinessValidationError(msg.USER_NOT_FOUND);
-  const token = await createJWT(user);
+  const token = createJWT(user);
 
   return { user: leanUser(user), token };
 };

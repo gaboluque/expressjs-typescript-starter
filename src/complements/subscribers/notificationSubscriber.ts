@@ -1,22 +1,19 @@
-import events from 'events';
 import { EmailSender } from '../notifiers/EmailSender/EmailSender';
 import { IUser } from '../../modules/users/users.types';
+import { ee, events } from '../../lib/core/EventEmitter';
 
-const notificationSubscriber = new events.EventEmitter();
-
-export const TOKEN_CONFIRMATION_NOTIFICATION = 'tokenConfirmation';
-notificationSubscriber.on(TOKEN_CONFIRMATION_NOTIFICATION, async (user: IUser, callback: any) => {
+ee.on(events.GET_CONFIRMATION_TOKEN_EVENT, async (user: IUser, callback: any) => {
   EmailSender.sendConfirmationEmail(user, callback);
 });
 
-export const PASSWORD_RECOVERY_NOTIFICATION = 'passwordRecovery';
-notificationSubscriber.on(PASSWORD_RECOVERY_NOTIFICATION, (user: IUser) => {
+ee.on(events.USER_SIGN_UP_EVENT, async (user: IUser, callback: any) => {
+  EmailSender.sendConfirmationEmail(user, callback);
+});
+
+ee.on(events.PASSWORD_RECOVERY_EVENT, (user: IUser) => {
   EmailSender.sendRecoverPasswordToken(user);
 });
 
-export const PASSWORD_RESET_NOTIFICATION = 'passwordReset';
-notificationSubscriber.on(PASSWORD_RESET_NOTIFICATION, (user: IUser) => {
+ee.on(events.PASSWORD_RESET_EVENT, (user: IUser) => {
   EmailSender.sendPasswordReset(user);
 });
-
-export default notificationSubscriber;
