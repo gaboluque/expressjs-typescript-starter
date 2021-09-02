@@ -1,5 +1,5 @@
 import pageTemplate from '../../../complements/helpers/templates/pageTemplate';
-import { LooseObject } from '../../../lib/commonTypes';
+import { IPagination, LooseObject } from '../../../lib/commonTypes';
 
 type QuasiAny = LooseObject | string | number;
 
@@ -26,19 +26,27 @@ const convertIntObj = (obj: QuasiAny): QuasiAny => {
   }, {});
 };
 
-export default async (klass: any, pagination: any, aggregate: LooseObject[], asKlass = null) => {
+const defaultPagination: IPagination['pagination'] = { page: 1, limit: 20, sort: {} };
+
+export default async (
+  klass: any,
+  pagination: IPagination['pagination'] = defaultPagination,
+  aggregate = [{}],
+  asKlass = null
+) => {
   const newPagination = {
-    ...pagination,
+    page: pagination.page,
+    limit: pagination.limit,
     sort: {
-      ...pagination.sort,
       createdAt: -1,
+      ...pagination.sort,
     },
   };
 
-  const page = await klass.aggregatePaginate(
+  const pageData = await klass.aggregatePaginate(
     klass.aggregate(aggregate.map(convertIntObj)),
     newPagination
   );
   const klassName = asKlass || klass.modelName.toLowerCase();
-  return pageTemplate(`${klassName}Docs`, page);
+  return pageTemplate(`${klassName}Docs`, pageData);
 };

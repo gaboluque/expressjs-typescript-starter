@@ -12,6 +12,6 @@ export interface IPaginationObj {
 }
 
 export interface IPagination {
-  query: LooseObject;
-  pagination: IPaginationObj;
+  query?: LooseObject;
+  pagination?: IPaginationObj;
 }

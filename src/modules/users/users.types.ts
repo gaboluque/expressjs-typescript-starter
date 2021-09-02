@@ -17,6 +17,7 @@ export interface IUserDTO {
 
 export interface IUser {
   _id: string;
+  id: number;
   email: string;
   password?: string;
   name: string;
@@ -28,7 +29,7 @@ export interface IAuth {
   password: string;
 }
 
-export interface IUserDoc extends Omit<IUser, '_id'>, Document {
+export interface IUserDoc extends Omit<IUser, '_id'>, Omit<Document, 'id'> {
   createdAt: Date;
   ref: number;
 }
