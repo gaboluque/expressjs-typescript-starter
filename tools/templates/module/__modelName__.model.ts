@@ -8,7 +8,7 @@ import { I__modelName__(pascalCase)Doc } from './__modelName__(camelCase).types'
 // @ts-ignore
 __modelName__sSchema.plugin(AutoIncrementFactory(mongoose.connection), {
   id: '__modelName__(camelCase)ref',
-  inc_field: 'ref',
+  inc_field: 'id',
 });
 
 __modelName__(camelCase)sSchema.plugin(mongoosePaginate);

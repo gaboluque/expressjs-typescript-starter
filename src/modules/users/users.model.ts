@@ -10,7 +10,7 @@ export const USER_MODEL_NAME = 'User';
 // @ts-ignore
 userSchema.plugin(AutoIncrementFactory(mongoose.connection), {
   id: 'user_ref',
-  inc_field: 'ref',
+  inc_field: 'id',
 });
 
 userSchema.plugin(mongoosePaginate);
