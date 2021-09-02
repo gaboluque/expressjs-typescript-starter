@@ -1,7 +1,7 @@
 import { dbClose, dbConnect, removeAllCollections } from '../../utils';
 import { userCreator } from '../../../src/modules/auth/services/userCreator';
 import { IUser } from '../../../src/modules/users/users.types';
-import usersFetcher from '../../../src/modules/users/services/usersFetcher';
+import { usersFetcher } from '../../../src/modules/users/services/usersFetcher';
 import { validUserDTO } from '../../utils/userTestUtils';
 
 describe('usersFetcher', () => {

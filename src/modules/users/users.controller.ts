@@ -10,8 +10,7 @@ import {
 import responseFormatter from '../../complements/helpers/templates/responseFormatter';
 import { userOwnUpdateValidator } from './users.validators';
 import msg from '../../utils/msg';
-import usersFetcher from './services/usersFetcher';
-import userUpdater from './services/userUpdater';
+import { usersFetcher, userUpdater } from './users.services';
 
 @Controller('/users')
 export class UsersController {

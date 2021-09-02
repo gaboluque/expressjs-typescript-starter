@@ -10,7 +10,7 @@ const usersFetcherAggregation = (match: LooseObject) => [
   },
 ];
 
-export default async ({ query, pagination }: IPagination) => {
+export const usersFetcher = async ({ query, pagination }: IPagination) => {
   const match = { ...query };
   if (match.name) match.name = new RegExp(match.name, 'i');
   if (match.email) match.email = new RegExp(match.email, 'i');

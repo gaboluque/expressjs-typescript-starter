@@ -31,5 +31,4 @@ export interface IAuth {
 
 export interface IUserDoc extends Omit<IUser, '_id'>, Omit<Document, 'id'> {
   createdAt: Date;
-  ref: number;
 }

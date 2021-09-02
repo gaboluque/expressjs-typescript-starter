@@ -10,6 +10,13 @@ export const mailError = (error: Error) => `MailError: ${error}`;
 export const mongoError = (error: Error) => `MongoDBError: ${error}`;
 export const s3Error = (error: Error) => `s3Error: ${error}`;
 
+type logLevel = 'warn' | 'info' | 'error';
+
+const logMessage = (level: logLevel, message: string) => ({
+  level,
+  message: `[${getTimeStamp()}] ${message}`,
+});
+
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
@@ -35,25 +42,15 @@ if (!['production', 'test'].includes(nodeEnv)) {
 }
 
 logHandler.on('error', (message: string) => {
-  // TODO: Slack message
-  logger.log({
-    level: 'error',
-    message: `[${getTimeStamp()}] ${message}`,
-  });
+  logger.log(logMessage('error', message));
 });
 
 logHandler.on('warning', (message: string) => {
-  logger.log({
-    level: 'warn',
-    message: `[${getTimeStamp()}] ${message}`,
-  });
+  logger.log(logMessage('warn', message));
 });
 
 logHandler.on('info', (message: string) => {
-  logger.log({
-    level: 'info',
-    message: `[${getTimeStamp()}] ${message}`,
-  });
+  logger.log(logMessage('info', message));
 });
 
 export default logHandler;
