@@ -1,0 +1,59 @@
+import events from 'events';
+import winston from 'winston';
+import moment from 'moment';
+import { nodeEnv } from '../../config';
+
+const logHandler = new events.EventEmitter();
+const getTimeStamp = () => moment().format('DD-MM-YYYY HH:mm:ss');
+
+export const mailError = (error: Error) => `MailError: ${error}`;
+export const mongoError = (error: Error) => `MongoDBError: ${error}`;
+export const s3Error = (error: Error) => `s3Error: ${error}`;
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [
+    //
+    // - Write all logs with level `error` and below to `error.log`
+    // - Write all logs with level `info` and below to `combined.log`
+    //
+    new winston.transports.File({
+      filename: './.logs/error.log',
+      level: 'error',
+    }),
+    new winston.transports.File({ filename: './.logs/combined.log' }),
+  ],
+});
+
+if (!['production', 'test'].includes(nodeEnv)) {
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.simple(),
+    })
+  );
+}
+
+logHandler.on('error', (message: string) => {
+  // TODO: Slack message
+  logger.log({
+    level: 'error',
+    message: `[${getTimeStamp()}] ${message}`,
+  });
+});
+
+logHandler.on('warning', (message: string) => {
+  logger.log({
+    level: 'warn',
+    message: `[${getTimeStamp()}] ${message}`,
+  });
+});
+
+logHandler.on('info', (message: string) => {
+  logger.log({
+    level: 'info',
+    message: `[${getTimeStamp()}] ${message}`,
+  });
+});
+
+export default logHandler;
