@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import mongoose from 'mongoose';
-import { isProduction } from '../utils/commonUtils';
-import { dbConf } from '../config';
+import { isProduction } from '../../src/utils/commonUtils';
+import { dbConf } from '../../src/config';
 
 export const connectDB = () => {
   if (!isProduction()) {

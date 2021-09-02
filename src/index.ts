@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import app from './app';
 import { serverConf } from './config';
-import { connectDB } from './db';
+import { connectDB } from '../setup/mongo';
 
 // Connect to database
 connectDB();
