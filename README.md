@@ -2,7 +2,7 @@
 Starter repo for ExpressJS API with Typescript
 
 
-## Todos
+## TODOs
 - More tests
 - Better logging
 - Enforce dependency injection

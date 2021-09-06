@@ -23,6 +23,7 @@ build/*
 
 # dist folder
 dist
+data
 
 # COVERAGE
 coverage
