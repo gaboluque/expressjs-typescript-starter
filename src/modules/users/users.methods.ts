@@ -9,6 +9,7 @@ const leanUser = (user: IUser) => {
   const userObject = { ...user };
   userObject._id = user._id.toString();
   delete userObject.password;
+  delete userObject.__v;
   return userObject;
 };
 

@@ -22,6 +22,7 @@ export interface IUser {
   password?: string;
   name: string;
   userContext: IUserContext;
+  __v?: number;
 }
 
 export interface IAuth {
@@ -29,6 +30,6 @@ export interface IAuth {
   password: string;
 }
 
-export interface IUserDoc extends Omit<IUser, '_id'>, Omit<Document, 'id'> {
+export interface IUserDoc extends Omit<IUser, '_id' | '__v'>, Omit<Document, 'id'> {
   createdAt: Date;
 }

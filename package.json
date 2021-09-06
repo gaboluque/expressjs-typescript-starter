@@ -11,7 +11,6 @@
     "build": "rm -rf dist && tsc -p ./tsconfig.json",
     "postbuild": "cp -r src/resources/ dist/resources",
     "test": "reset && NODE_ENV=test jest --detectOpenHandles --silent=false --verbose --forceExit ",
-    "test:integration": "reset && NODE_ENV=test jest --detectOpenHandles --silent=false --verbose --forceExit tests/integration false",
     "checkTS": "yarn build && rm -rf -r ./dist",
     "generate": "node ./tools/generate.js"
   },

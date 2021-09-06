@@ -25,13 +25,13 @@ export const userCreator = async (userDTO: IUserDTO) => {
   await verifyBusinessRules(userDTO);
   const user = await createUser(userDTO);
 
+  await user.save();
+
   ee.emit(events.USER_SIGN_UP_EVENT, user, async () => {
     await UsersRepo.updateById(user._id, {
       'userContext.confirmationSentAt': new Date(),
     });
   });
-
-  await user.save();
 
   return leanUser(user.toObject() as IUser);
 };

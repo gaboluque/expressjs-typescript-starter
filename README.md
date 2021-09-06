@@ -3,7 +3,6 @@ Starter repo for ExpressJS API with Typescript
 
 
 ## Todos
-- Event emitters for analytics, email sending, etc
 - More tests
 - Better logging
 - Enforce dependency injection
