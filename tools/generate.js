@@ -9,7 +9,7 @@ generateTemplateFiles([
     },
     stringReplacers: [{ question: 'Enter model name', slot: '__modelName__' }],
     output: {
-      path: './src/modules/__moduleName__(camelCase)',
+      path: './src/modules/__modelName__s',
       pathAndFileNameDefaultCase: '(camelCase)',
     },
     onComplete: (results) => {

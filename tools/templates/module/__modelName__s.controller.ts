@@ -21,7 +21,7 @@ import {
   __modelName__(camelCase)UpdateValidator,
 } from './__modelName__(camelCase).validators';
 
-@Controller('/__modelName__(camelCase)')
+@Controller('/__modelName__(camelCase)s')
 export class AnnouncementsController {
   @Post('/')
   @Authorize([])

@@ -6,7 +6,7 @@ import { __modelName__(camelCase)sSchema } from './__modelName__(camelCase)Schem
 import { I__modelName__(pascalCase)Doc } from './__modelName__(camelCase).types';
 
 // @ts-ignore
-__modelName__sSchema.plugin(AutoIncrementFactory(mongoose.connection), {
+__modelName__(camelCase)sSchema.plugin(AutoIncrementFactory(mongoose.connection), {
   id: '__modelName__(camelCase)ref',
   inc_field: 'id',
 });
