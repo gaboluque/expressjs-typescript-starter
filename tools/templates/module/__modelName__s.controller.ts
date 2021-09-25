@@ -65,6 +65,6 @@ export class AnnouncementsController {
   public async index({ permittedParams }: Request, res: Response) {
     const __modelName__(camelCase)s = __modelName__(camelCase)sFetcher(permittedParams);
 
-    res.status(200).send(responseFormatter(__modelName__(camelCase)s));
+    res.status(200).send(responseFormatter(__modelName__(camelCase)s))
   }
 }

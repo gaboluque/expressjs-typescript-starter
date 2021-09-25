@@ -5,8 +5,12 @@ import msg from '../../../utils/msg';
 import { IUser, IUserDTO } from '../../users/users.types';
 import { UserModel } from '../../users/users.model';
 import encryptionGenerator from '../../../utils/shared/utilServices/encryptionGenerator';
-import { userContextCreator } from './userContextCreator';
 import { ee, events } from '../../../lib/core/EventEmitter';
+
+export const userContextCreator = async () => {
+  const confirmationToken = await UsersRepo.tokenGenerator('confirmationToken');
+  return { confirmationToken };
+};
 
 const verifyBusinessRules = async ({ email }: IUserDTO) => {
   const foundUser = await UsersRepo.findOne({ email }, { _id: 1 });

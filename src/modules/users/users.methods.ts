@@ -1,26 +1,18 @@
 import jwt from 'jsonwebtoken';
-import { NextFunction } from 'express';
-import encryptionGenerator from '../../utils/shared/utilServices/encryptionGenerator';
+import { omit, pick } from 'lodash';
 import { IUser, IUserDoc } from './users.types';
 import { IAuthData } from '../auth/auth.types';
 import { authConf } from '../../config';
 
+// Lean user method used to remove password from responses
 const leanUser = (user: IUser) => {
   const userObject = { ...user };
   userObject._id = user._id.toString();
-  delete userObject.password;
-  delete userObject.__v;
-  return userObject;
+  return omit(userObject, ['password', '__v']);
 };
 
 const authData = (user: IUser): IAuthData => {
-  const { _id, email, name, userContext } = user;
-  return {
-    _id,
-    email,
-    name,
-    userContext,
-  };
+  return pick(user, ['_id', 'email', 'name', 'userContext']);
 };
 
 const createJWT = (user: IUserDoc) => {
@@ -29,12 +21,4 @@ const createJWT = (user: IUserDoc) => {
   });
 };
 
-async function preSave(this: IUserDoc, next: NextFunction): Promise<void> {
-  if (this.isModified('password')) {
-    this.password = await encryptionGenerator(this.password);
-  }
-
-  next();
-}
-
-export { leanUser, preSave, createJWT, authData };
+export { leanUser, createJWT, authData };

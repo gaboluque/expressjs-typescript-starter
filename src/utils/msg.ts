@@ -20,6 +20,8 @@ const msg = {
   REQUIRED_EMAIL: 'userRequiredEmail',
   INVALID_EMAIL: 'userInvalidEmail',
   USER_REQUIRED_NAME: 'userRequiredName',
+  USER_NAME_MIN_LENGTH_2: 'userNameMinLength2',
+  USER_NAME_MAX_LENGTH_30: 'userNameMaxLength30',
   USER_NAME_LENGTH_2_TO_30: 'userNameLength2to30',
   UPDATE_USER_OWN_DATA_SUCCESS: 'successUserOwnDataUpdate',
 

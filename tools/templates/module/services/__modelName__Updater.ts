@@ -6,4 +6,4 @@ export const __modelName__(camelCase)Updater = (
   __modelName__DTO: I__modelName__(pascalCase)UpdateDTO
 ) => {
   return __modelName__Repo.updateById(__modelName__Id, __modelName__DTO);
-};
+}

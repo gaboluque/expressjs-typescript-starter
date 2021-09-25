@@ -20,4 +20,4 @@ export const __modelName__(pascalCase)Model = mongoose.model<I__modelName__(pasc
     __modelName__(constantCase)ModelName,
     __modelName__(camelCase)sSchema,
   '__modelName__(camelCase)s'
-);
+)

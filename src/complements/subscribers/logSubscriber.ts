@@ -8,7 +8,6 @@ const getTimeStamp = () => moment().format('DD-MM-YYYY HH:mm:ss');
 
 export const mailError = (error: Error) => `MailError: ${error}`;
 export const mongoError = (error: Error) => `MongoDBError: ${error}`;
-export const s3Error = (error: Error) => `s3Error: ${error}`;
 
 type logLevel = 'warn' | 'info' | 'error';
 

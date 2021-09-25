@@ -9,5 +9,5 @@ export const __modelName__(camelCase)sFetcher = ({ query, pagination }: IPaginat
     ...query,
   };
 
-  return aggregateFetcher(__modelName__(pascalCase)Model, pagination, __modelName__FetcherAggregation(match));
+  return aggregateFetcher(__modelName__(pascalCase)Model, pagination, __modelName__FetcherAggregation(match))
 };

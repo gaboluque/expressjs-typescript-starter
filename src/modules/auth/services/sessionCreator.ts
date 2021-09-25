@@ -27,7 +27,7 @@ export const sessionCreator = async ({ email, password }: IAuth) => {
     await verifyCredentials(user, password);
     await verifyUserContext(user.userContext);
 
-    const token = await createJWT(user);
+    const token = createJWT(user);
 
     return { user: leanUser(user), token };
   }

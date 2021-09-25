@@ -72,18 +72,6 @@ export class EmailSender {
     });
   }
 
-  public static sendRandomPassword(user: IUser, newPassword: string) {
-    EmailSender.sendEmail({
-      to: user.email,
-      subject: `Contraseña provisional`,
-      template: 'provisionalPassword',
-      context: {
-        name: user.name,
-        newPassword,
-      },
-    });
-  }
-
   public static sendRecoverPasswordToken(user: IUser) {
     const targetUrl = EmailSender.targetCreator({
       path: '/forgot-password',

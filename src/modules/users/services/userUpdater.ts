@@ -10,9 +10,11 @@ export const userUpdater = async (userDto: IUserDTO, userId: string) => {
   // We don't want to update the user's email
   const newDTO = { ...omit(userDto, 'email') };
 
+  // If the users want tu update their password, we ned to encrypt it
   if (newDTO.password) newDTO.password = await encryptionGenerator(newDTO.password);
 
   const user = await UsersRepo.updateById(userId, newDTO);
   if (!user) throw new NotFoundError(msg.USER_NOT_FOUND);
+
   return leanUser(user);
 };

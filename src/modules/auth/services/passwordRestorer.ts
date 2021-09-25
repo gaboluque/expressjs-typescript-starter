@@ -13,7 +13,6 @@ export default async ({ password, restorePasswordToken }: IPasswordRestorerParam
   const newPassword = await encryptionGenerator(password);
 
   const user = await UsersRepo.restorePasswordByPasswordToken(restorePasswordToken, newPassword);
-
   if (!user) throw new ForbiddenError();
 
   ee.emit(events.PASSWORD_RESET_EVENT, user);

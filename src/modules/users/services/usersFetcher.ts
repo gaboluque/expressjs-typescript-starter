@@ -10,10 +10,14 @@ const usersFetcherAggregation = (match: LooseObject) => [
   },
 ];
 
+const regexFields = ['name', 'email'];
+
 export const usersFetcher = async ({ query, pagination }: IPagination) => {
   const match = { ...query };
-  if (match.name) match.name = new RegExp(match.name, 'i');
-  if (match.email) match.email = new RegExp(match.email, 'i');
+
+  regexFields.forEach((f) => {
+    if (match[f]) match[f] = new RegExp(match[f], 'i');
+  });
 
   return aggregateFetcher(UserModel, pagination, usersFetcherAggregation(match));
 };

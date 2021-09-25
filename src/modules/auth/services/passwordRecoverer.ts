@@ -8,7 +8,6 @@ export default async (email: string) => {
   const restorePasswordToken = await UsersRepo.tokenGenerator('restorePasswordToken');
 
   const user = await UsersRepo.setRestorePasswordTokenByEmail(email, restorePasswordToken);
-
   if (!user) throw new BusinessValidationError(msg.NO_MATCHING_EMAIL_USER);
 
   ee.emit(events.PASSWORD_RECOVERY_EVENT, user);

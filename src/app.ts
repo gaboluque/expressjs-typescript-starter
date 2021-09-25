@@ -10,6 +10,7 @@ import { cacheCatcher } from './complements/middlewares/cache';
 import './complements/subscribers';
 import './modules/auth/auth.controller';
 import './modules/users/users.controller';
+import { statusMiddleware } from './complements/middlewares/status';
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ if (['development', 'staging'].includes(app.get('env'))) {
   app.use(loggerMiddleware);
   app.get('/routes', routesMiddleware);
 }
+
+app.get('/status', statusMiddleware);
 
 app.use(cacheCatcher);
 

@@ -24,8 +24,8 @@ const userSchemaFields: Record<keyof LeanUser, LooseObject> = {
     type: String,
     required: msg.USER_REQUIRED_NAME,
     trim: true,
-    minlength: [2, 'userNameMinLength2'],
-    maxlength: [30, 'userNameMaxLength30'],
+    minlength: [2, msg.USER_NAME_MIN_LENGTH_2],
+    maxlength: [30, msg.USER_NAME_MAX_LENGTH_30],
   },
   userContext: userContextSchema,
 };

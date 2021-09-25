@@ -1,9 +1,9 @@
 import { Schema } from 'express-validator';
 
-export const __modelName__(camelCase)CreateValidator: Schema = {
+export const __modelName__(camelCase)Schema = {
   // TODO: Add schema validations
 };
 
-export const __modelName__(camelCase)UpdateValidator: Schema = {
+export const __modelName__(camelCase)Schema = {
   // TODO: Add schema validations
 };
